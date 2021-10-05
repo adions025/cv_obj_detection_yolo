@@ -14,7 +14,8 @@ import numpy as np
 import os
 import cv2
 
-# paths
+# Paths
+# You need the following folders
 dataset = os.path.join(settings.DEFAULT_DATA, "kangaroo-master")
 annotation_dir = os.path.join(dataset, "annots")
 images_dir = os.path.join(dataset, "images")
