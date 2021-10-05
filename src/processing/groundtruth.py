@@ -7,13 +7,10 @@ import numpy as np
 import os
 import cv2
 
+# paths
 dataset = os.path.join(settings.DEFAULT_DATA, "kangaroo-master")
-annots_dir = os.path.join(dataset, "annots")
-annots_1 = os.path.join(dataset, "annots/00001.xml")
+annotation_dir = os.path.join(dataset, "annots")
 images_dir = os.path.join(dataset, "images")
-
-images_1 = os.path.join(images_dir, "00001.jpg")
-
 images_gt = os.path.join(dataset, "images_gt")
 
 
@@ -90,4 +87,4 @@ def read_xml_draw_gt(path_images: str, path_annotations: str, image_list: list):
 
 if __name__ == "__main__":
     images_list = util.save_images_log(images_dir)
-    read_xml_draw_gt(images_dir, annots_dir, images_list)
+    read_xml_draw_gt(images_dir, annotation_dir, images_list)
