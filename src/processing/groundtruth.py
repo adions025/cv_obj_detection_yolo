@@ -1,3 +1,10 @@
+"""
+Load images using PIL or OpenCV,
+Read and draw xml annotations for
+object detection.
+
+@author: Adonis Gonzalez
+"""
 from PIL.JpegImagePlugin import JpegImageFile
 import xml.etree.ElementTree as ET
 from PIL import Image, ImageDraw
