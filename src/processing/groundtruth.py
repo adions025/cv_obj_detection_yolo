@@ -33,7 +33,7 @@ def load_image_pil(image_path: str) -> JpegImageFile:
     return Image.open(image_path)
 
 
-def load_image_cv2(image_path: str):
+def load_image_cv2(image_path: str) -> np.ndarray:
     """
     Function to load image using OpenCV. If not correct
     file path raises an error.
@@ -46,6 +46,13 @@ def load_image_cv2(image_path: str):
 
 
 def draw_gt_pil(img_pil: JpegImageFile, img_name: str, xmin: int, ymin: int, xmax: int, ymax: int):
+    """
+    Function to write bounding boxes using PIL.
+
+    :param img_pil: A loaded JpegImageFile is needed
+    :param img_name: A str image name
+    :param xmin, ymin, xmax, ymax: points to draw
+    """
     color = 'black'
     thickness = 2
 
@@ -57,6 +64,13 @@ def draw_gt_pil(img_pil: JpegImageFile, img_name: str, xmin: int, ymin: int, xma
 
 
 def draw_gt_cv2(image: np.ndarray, img_name: str, xmin: int, ymin: int, xmax: int, ymax: int):
+    """
+    Function to write bounding boxes using OpenCV.
+
+    :param image: A loaded image as np.ndarray
+    :param img_name: A str image name
+    :param xmin, ymin, xmax, ymax: points to draw
+    """
     color = (0, 0, 0)  # decimal code (r,g,v)
     thickness = 2
 
@@ -65,6 +79,13 @@ def draw_gt_cv2(image: np.ndarray, img_name: str, xmin: int, ymin: int, xmax: in
 
 
 def read_xml_draw_gt(path_images: str, path_annotations: str, image_list: list):
+    """
+    Function to read xml files and also call draw methods
+
+    :param path_images: A str like /to/path/images           (.jpg files)
+    :param path_annotations: A str like /to/path/annotations (.xml files)
+    :param image_list: A list of images in the same path
+    """
     for img in image_list:
         name_xml = img.split('.jpg')[0] + '.xml'
 
@@ -93,5 +114,8 @@ def read_xml_draw_gt(path_images: str, path_annotations: str, image_list: list):
 
 
 if __name__ == "__main__":
+    """
+    Start program
+    """
     images_list = util.save_images_log(images_dir)
     read_xml_draw_gt(images_dir, annotation_dir, images_list)
