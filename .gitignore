@@ -1,0 +1,6 @@
+*.weights
+*.h5
+*.pyc
+*.mp4
+*.DS_Store
+*.bak
