@@ -103,15 +103,15 @@ def read_xml_draw_gt(path_images: str, path_annotations: str, image_list: list):
                     if child_of_object.tag == 'name':
                         label = str(child_of_object.text)
                     if child_of_object.tag == 'bndbox':
-                        for child_of_root in child_of_object:
-                            if child_of_root.tag == 'xmin':
-                                xmin = int(child_of_root.text)
-                            if child_of_root.tag == 'xmax':
-                                xmax = int(child_of_root.text)
-                            if child_of_root.tag == 'ymin':
-                                ymin = int(child_of_root.text)
-                            if child_of_root.tag == 'ymax':
-                                ymax = int(child_of_root.text)
+                        for child_of_obj in child_of_object:
+                            if child_of_obj.tag == 'xmin':
+                                xmin = int(child_of_obj.text)
+                            if child_of_obj.tag == 'xmax':
+                                xmax = int(child_of_obj.text)
+                            if child_of_obj.tag == 'ymin':
+                                ymin = int(child_of_obj.text)
+                            if child_of_obj.tag == 'ymax':
+                                ymax = int(child_of_obj.text)
 
                 # use pil or cv2 to draw the ground truth
                 draw_gt_cv2(image, img, label, xmin, ymin, xmax, ymax)
