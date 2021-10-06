@@ -16,7 +16,7 @@ import cv2
 
 # Paths
 # You need the following folders
-dataset = os.path.join(settings.DEFAULT_DATA, "kangaroo-master")
+dataset = os.path.join(settings.DEFAULT_DATA, "dataset1")
 annotation_dir = os.path.join(dataset, "annots")
 images_dir = os.path.join(dataset, "images")
 images_gt = os.path.join(dataset, "images_gt")
