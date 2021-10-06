@@ -64,18 +64,20 @@ def draw_gt_pil(img_pil: JpegImageFile, img_name: str, xmin: int, ymin: int, xma
     img_pil.save(os.path.join(images_gt, img_name), "JPEG")
 
 
-def draw_gt_cv2(image: np.ndarray, img_name: str, xmin: int, ymin: int, xmax: int, ymax: int):
+def draw_gt_cv2(image: np.ndarray, img_name: str, label: str, xmin: int, ymin: int, xmax: int, ymax: int):
     """
     Function to write bounding boxes using OpenCV.
 
     :param image: A loaded image as np.ndarray
     :param img_name: A str image name
+    :param img_name: A str label
     :param xmin, ymin, xmax, ymax: points to draw
     """
     color = (0, 0, 0)  # decimal code (r,g,v)
     thickness = 2
 
     cv2.rectangle(image, (xmax, ymax), (xmin, ymin), color=color, thickness=thickness)
+    cv2.putText(image, label, (xmin, ymin - 5), cv2.FONT_HERSHEY_SIMPLEX, 1e-3 * image.shape[0], color, 2)
     cv2.imwrite(os.path.join(images_gt, img_name), image)
 
 
@@ -98,6 +100,8 @@ def read_xml_draw_gt(path_images: str, path_annotations: str, image_list: list):
         for child_of_root in root:
             if child_of_root.tag == 'object':
                 for child_of_object in child_of_root:
+                    if child_of_object.tag == 'name':
+                        label = str(child_of_object.text)
                     if child_of_object.tag == 'bndbox':
                         for child_of_root in child_of_object:
                             if child_of_root.tag == 'xmin':
@@ -110,7 +114,7 @@ def read_xml_draw_gt(path_images: str, path_annotations: str, image_list: list):
                                 ymax = int(child_of_root.text)
 
                 # use pil or cv2 to draw the ground truth
-                draw_gt_cv2(image, img, xmin, ymin, xmax, ymax)
+                draw_gt_cv2(image, img, label, xmin, ymin, xmax, ymax)
                 #  draw_gt_pil(image, '00001.jpg', xmin, ymin, xmax, ymax)
 
 
