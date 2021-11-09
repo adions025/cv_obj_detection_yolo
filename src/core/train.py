@@ -1,4 +1,9 @@
-#! /usr/bin/env python
+"""
+Functions to train a object detection model
+using tensorflow and keras backend.
+
+@author: Adonis Gonzalez
+"""
 
 import argparse
 import os
